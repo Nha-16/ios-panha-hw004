@@ -80,4 +80,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "delete") { _, _, _ in
+            
+            let deleteID = self.articles[indexPath.row].id
+            
+            Network.shared.removeArticles(id: deleteID)
+            
+            self.articles.remove(at: indexPath.row)
+            
+            self.tableVIew.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
 }
+
