@@ -9,7 +9,7 @@ import UIKit
 import ProgressHUD
 
 class PostViewController: UIViewController {
-
+    
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var articleImageView: UIImageView!
@@ -30,7 +30,7 @@ class PostViewController: UIViewController {
         self.articleImageView.addGestureRecognizer(tapGesture)
         pickerView.delegate = self
         prepareOptions()
-
+        
     }
     
     func chooseOptions(option: UIImagePickerController.SourceType){
@@ -39,7 +39,7 @@ class PostViewController: UIViewController {
         self.pickerView.sourceType = option
         
         present(self.pickerView, animated: true, completion: nil)
-      
+        
     }
     
     func prepareOptions(){
@@ -79,16 +79,16 @@ class PostViewController: UIViewController {
         }
         
     }
-
-
+    
+    
 }
 extension PostViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-     
+        
         if let possibleImage = info[.editedImage] as? UIImage {
             self.articleImageView.image = possibleImage
-
+            
             self.imageData = possibleImage.jpegData(compressionQuality: 1.0)
             
         }

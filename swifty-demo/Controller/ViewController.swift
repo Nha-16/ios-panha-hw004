@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableVIew: UITableView!
     
     var articles: [Article] = []
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -50,14 +50,14 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailArticle" {
             if let desVC = segue.destination as? DetailtViewController, let indexPath = sender as? IndexPath{
-
+                
                 let article = self.articles[indexPath.row]
                 
                 desVC.article = article
                 
             }
             
-           
+            
             
         }
     }

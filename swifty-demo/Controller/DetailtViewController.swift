@@ -6,28 +6,28 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailtViewController: UIViewController {
-
+    
     var article: Article?
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelDescription: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("Title : ",article?.title ?? "")
-
-        // Do any additional setup after loading the view.
+        
+        labelTitle.text = article?.title ?? ""
+        labelDescription.text = article?.description ?? ""
+        
+        let url = URL(string: article!.imageUrl)
+        
+        let defaultImage = UIImage(systemName: "camera.fill")
+        
+        self.imageView.kf.setImage(with: url,placeholder: defaultImage, options: [.transition(.fade(0.25))])
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -18,9 +18,9 @@ enum NetworkingError: Error {
 
 struct Network {
     static let shared = Network()
-  
+    
     let baseURL = "http://110.74.194.124:3034/api"
-   
+    
     func postArticle(title: String?, description: String?, imageURL: String?, completion: @escaping(Result<String, Error>)->()){
         
         let article: [String:Any] = [
@@ -77,8 +77,22 @@ struct Network {
             completion(nil)
         }
         
-      
+        
     }
+    
+    func removeArticles(id: String?) {
+        AF.request("\(baseURL)/articles/\(id ?? "")", method: .delete).response
+        { response in
+            if let error = response.error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
     func fetchArticles(completion: @escaping(Result<[Article],Error>)->()){
         
@@ -92,9 +106,9 @@ struct Network {
                 return
             }
             do{
-               var articles:[Article] = []
-               let jsonData = try JSON(data: safeData)
-               for jsonArticle in jsonData["data"].arrayValue {
+                var articles:[Article] = []
+                let jsonData = try JSON(data: safeData)
+                for jsonArticle in jsonData["data"].arrayValue {
                     let article = Article(json: jsonArticle)
                     articles.append(article)
                 }
